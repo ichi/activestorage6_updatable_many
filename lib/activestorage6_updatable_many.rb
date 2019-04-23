@@ -1,6 +1,11 @@
-require "activestorage6_updatable_many/version"
+require 'activestorage6_updatable_many/version'
 
-module Activestorage6UpdatableMany
-  class Error < StandardError; end
-  # Your code goes here...
+ActiveSupport.on_load(:active_record) do
+  require 'active_storage/attached'
+  require 'activestorage6_updatable_many/attached/model'
+
+  # if use activestorage6
+  if defined?(ActiveStorage::Attached::Changes)
+    ActiveRecord::Base.singleton_class.prepend(Activestorage6UpdatableMany::Attached::Model)
+  end
 end
