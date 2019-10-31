@@ -5,5 +5,5 @@ module Activestorage6UpdatableMany
   end
 end
 
-require 'activestorage6_updatable_many/attached/changes/update_many'
 require 'activestorage6_updatable_many/attached/changes/update_one_of_many'
+require 'activestorage6_updatable_many/attached/changes/update_many'

@@ -1,5 +1,3 @@
-require 'activestorage6_updatable_many/attached/changes/update_one_of_many'
-
 module Activestorage6UpdatableMany
   class Attached::Changes::UpdateMany < ActiveStorage::Attached::Changes::CreateMany
     attr_reader :context

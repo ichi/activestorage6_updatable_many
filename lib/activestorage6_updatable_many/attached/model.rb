@@ -5,6 +5,10 @@ module Activestorage6UpdatableMany
       def has_many_attached(name, dependent: :purge_later)
         super.tap do
           generated_association_methods.class_eval <<-CODE, __FILE__, __LINE__ + 1
+            def #{name}_updatable
+              @active_storage_attached_#{name}_updatable ||= Activestorage6UpdatableMany::Attached::UpdatableMany.new("#{name}", self)
+            end
+
             def #{name}_updatable_attachments=(attachables)
               attachment_changes["#{name}_updatable"] ||= Activestorage6UpdatableMany::Attached::Changes::UpdateMany.new("#{name}", self, [])
 
@@ -29,5 +33,3 @@ module Activestorage6UpdatableMany
     end
   end
 end
-
-require 'activestorage6_updatable_many/attached/changes'
